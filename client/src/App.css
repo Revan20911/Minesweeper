@@ -1,0 +1,52 @@
+.App {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.Board{
+  display: grid;
+  grid-template-columns: repeat(10, 4rem);
+  grid-template-rows: repeat(10, 4rem);
+
+  width: 40rem;
+  height: 40rem;
+
+  background-color: lightgray
+
+}
+
+.Cell{
+
+  height: 3.9rem;
+  width: 3.9rem;
+  background-color: gray;
+  margin: 1px;
+}
+
+.Cell:hover{
+  cursor: pointer;
+
+  background-color: gainsboro;
+}
+
+.Mine{
+
+  height: 3.9rem;
+  width: 3.9rem;
+  background-color: red;
+  margin: 1px;
+
+}
+
+.Safe{
+
+  height: 3.9rem;
+  width: 3.9rem;
+  background-color: blue;
+  margin: 1px;
+
+
+}
