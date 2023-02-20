@@ -15,8 +15,6 @@ export default class Board extends React.Component{
         mineCount: this.props.mines,
      }
 
-     
-
      getNeighbours(x, y){
 
         let nArray = []
@@ -58,6 +56,59 @@ export default class Board extends React.Component{
         return  nArray;
 
      }
+    
+    handleRightClick(x,y, e){
+        e.preventDefault();
+
+        let updatedBoard = this.state.boardSettings;
+
+        updatedBoard[x][y].isFlagged = true;
+        updatedBoard[x][y].isOpen = true;
+
+        this.setState({boardSettings: updatedBoard});
+
+     }
+
+     handleLeftClick(x,y){
+
+        
+        let updatedBoard = this.state.boardSettings;
+
+        updatedBoard[x][y].isOpen = true;
+
+        console.log(updatedBoard[x][y].neighbours);
+
+        updatedBoard[x][y].neighbours.forEach((n) => {
+            let nx = n[0 ];
+            let ny = n[1];
+
+            if(updatedBoard[nx][ny].isMine == false && updatedBoard[nx][ny].isOne == false ){
+
+                updatedBoard[nx][ny].isOpen = true;
+
+            }
+
+            if(updatedBoard[nx][ny].isMine == true){
+
+                if(updatedBoard[nx + 1][ny] && updatedBoard[nx][ny+1]){
+
+                    updatedBoard[nx + 1][ny].isOne = true;
+                    updatedBoard[nx][ny+1].isOne = true;
+
+                }
+
+            }
+        })
+
+        if(updatedBoard[x][y].isMine == true){
+
+            updatedBoard.gameOver = true;
+            
+        }
+        
+        this.setState({ boardSettings: updatedBoard});
+        
+     }
 
 
      renderBoard(board){
@@ -67,7 +118,8 @@ export default class Board extends React.Component{
                 return(
                 <div key={index}>
                     <Cell 
-                    
+                    onClick={() => this.handleLeftClick(cell.x, cell.y)}
+                    onContextMenu={e => this.handleRightClick(cell.x, cell.y, e)}
                     value={cell}
                     />
                 </div>)
