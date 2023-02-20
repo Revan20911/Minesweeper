@@ -14,45 +14,72 @@ export default class Board extends React.Component{
 
         mineCount: this.props.mines,
      }
+    
+    checkVictory(){
+
+        let count = 0;
+        let mines = this.state.mineList
+        let board = this.state.boardSettings
+
+        mines.forEach((mine) => {
+
+            for(let i = 0; i < 10; i++){
+                for(let j = 0; j < 10; j++){
+                    if(board[i][j].x == mine[0] && board[i][j].y == mine[1]){
+                        if(board[i][j].isFlagged == true){
+                            count++;
+                        }
+                    }
+                }
+            }
+            
+        })
+
+
+        if(count === 10){
+
+            return true;
+
+        }
+
+     }
 
      getNeighbours(x, y){
 
         let nArray = []
 
-        if(x > 0 && y > 0){
-                nArray.push(
-                    [x-1, y],
-                    [x+1, y],
-                    [x+1, y+1],
-                    [x+1, y-1],
-                    [x-1, y+1],
-                    [x-1, y-1],
-                    [x, y+1 ],
-                    [x, y-1],
-                ) 
+        if (x > 0) {
+            nArray.push([x - 1, y]);
         }
-        if(y < 0){
-            nArray.push(
-                [x-1, y],
-                [x+1, y],
-                [x+1, y+1],
-                [x-1, y+1],
-                [x, y+1 ],
-            )
+        
+        if (x < 9) {
+            nArray.push([x + 1, y]);
         }
-
-        if(x < 0){
-
-            nArray.push(
-                
-                    [x+1, y],
-                    [x+1, y+1],
-                    [x+1, y-1],
-                    [x, y+1 ],
-                    [x, y-1],
-            )
+       
+        if (y > 0) {
+            nArray.push([x, y - 1]);
         }
-
+        
+        if (y < 9) {
+            nArray.push([x, y + 1]);
+        }
+       
+        if (x > 0 && y > 0) {
+            nArray.push([x - 1, y - 1]);
+        }
+        
+        if (x > 0 && y < 9) {
+            nArray.push([x - 1, y + 1]);
+        }
+        
+        if (x < 9 && y < 9) {
+            nArray.push([x + 1, y + 1]);
+        }
+        
+        if (x < 9 && y > 0) {
+            nArray.push([x + 1, y - 1]);
+        }
+        
         return  nArray;
 
      }
@@ -181,6 +208,28 @@ export default class Board extends React.Component{
         }
 
        return temp;
+     }
+     
+     gameOver(){
+
+        if(this.state.gameOver === true) 
+        <div>
+            <h1>Game Over</h1>
+            <button onClick={this.resetGame}>Retry?</button>
+        </div> 
+        
+        if(this.state.victory === true){
+
+            return <div>
+            <h1>You Win!</h1>
+            <button onClick={this.resetGame}>Retry?</button>
+        </div> 
+        }
+
+        if(this.state.victory === false && this.state.gameOver === false)
+
+        return <h1>Minesweeper</h1>
+
      }
 
      render(){
