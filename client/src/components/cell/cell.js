@@ -1,36 +1,30 @@
 import React from "react";
-import mine from "assets/exploded_bomb.png";
-import flag from "assets/flagged_bomb.png";
+import mine from "../assets/exploded_bomb.png";
+import flag from "../assets/flagged_bomb.png";
+import closed from "../assets/closed.png";
 
 export default class Cell extends React.Component{
     getValue(){
 
-        if(this.props.isOpen){
-            return this.props.value.isMine ? <img src={mine}/> : null
+        if(this.props.value.neighbour === 0 ){
+            return <img src={closed} alt="" />;
         }
 
-        if(this.props.value.isMine){
-
-            return <img src={mine}/>
-        }
-
-        if(this.props.value.isFlagged){
-
-            return <img src={flag}/>
+        if(this.props.value.isFlagged == true){
+            return <img src={flag} alt=""/>
         }
     }
 
     render(){
-        let className = 
-        "cell" + 
-        (this.props.value.isOpen ? "open " : " ") +
-        (this.props.value.isMine ? "mine" : " ")+
-        (this.props.value.isFlagged ? "flag" : "");
+        let className = "cell";
+
+        console.log(this.props.value);
+        
 
         return(
-            <div ref={"cell"} className={className} onClick={this.props.onClick}>
+            <div  className={className} >
                 {this.getValue()}
             </div>
-        )
+        );
     }
 }
