@@ -11,8 +11,10 @@ export default class Board extends React.Component{
             this.props.mines
         ),
         gameOver: false,
+        
+        victory: false,
 
-        mineCount: this.props.mines,
+        mineList: [],
      }
     
     checkVictory(){
