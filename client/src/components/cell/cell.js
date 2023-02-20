@@ -3,6 +3,7 @@ import mine from "../assets/exploded_bomb.png";
 import flag from "../assets/flagged_bomb.png";
 import closed from "../assets/closed.png";
 import open from "../assets/open.png";
+import one from "../assets/one.png";
 
 export default class Cell extends React.Component{
     getImage(){
