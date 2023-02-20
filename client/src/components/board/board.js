@@ -93,25 +93,42 @@ export default class Board extends React.Component{
      }
 
 
-     initBoardSettings(height, width, mines){
-        let temp = [];
+     let temp = [];
+
+        let mineMap = this.generateMines();
 
         for(let i = 0; i < height; i++){
             temp.push([]);
             for(let j = 0; j < width; j++){
-                temp[i][j] = {
+
+                let mineValue = false;
+
+                let neighbours = this.getNeighbours(i,j);
+                
+                mineMap.forEach((mine) => {
+
+                    if(mine[0] === i && mine[1] === j){
+                        
+                        mineValue = true;
+                    }
+                })
+
+                temp[i][j]= {
 
                     x: i,
                     y: j,
-                    isMine: false,
-                    neighbours: [],
+                    isMine: mineValue,
+                    neighbours: neighbours,
                     isOpen: false,
+                    isOne: false,
+                    isTwo: false,
 
                 }
+
             }
         }
 
-        return temp;
+       return temp;
      }
 
      render(){
