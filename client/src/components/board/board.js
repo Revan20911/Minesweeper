@@ -237,9 +237,12 @@ initBoardSettings(height, width){
      render(){
 
         return(
+            <>
+            {this.gameOver()}
             <div className='board'>
                 {this.renderBoard(this.state.boardSettings)}
             </div>
+            </>
         )
      }
 }
