@@ -7,10 +7,7 @@ import open from "../assets/open.png";
 export default class Cell extends React.Component{
     getImage(){
 
-
-        if(this.props.value.neighbour === 0 ){
-
-            if(this.props.value.isOpen != false){
+ if(this.props.value.isOpen != false && this.props.value.isFlagged != true){
 
                 if(this.props.value.isMine == true){
                     return <img src={mine} alt=""/>
@@ -21,14 +18,25 @@ export default class Cell extends React.Component{
                 }
             }
 
+            if(this.props.value.isOne == true){
+
+                return <img alt="" src={one}/>
+
+
             }
+
+        
 
             if(this.props.value.isOpen == false){
                 return <img src={closed} alt=""/>
             }
-            
-        
+
+            if(this.props.value.isFlagged == true){
+
+                return <img alt="" src={flag}/>
+            }
     }
+
 
     render(){
         let className = "cell";
