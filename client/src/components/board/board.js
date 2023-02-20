@@ -15,66 +15,47 @@ export default class Board extends React.Component{
         mineCount: this.props.mines,
      }
 
-     getMines(board){
+     
 
-        let mineArray = [];
-        board.map(boardrow => {
-            boardrow.map((cell) => {
+     getNeighbours(x, y){
 
-                if(cell.isMine){
-                    mineArray.push(cell);
-                }
-                return;
-            })
-            return;
-        })
-     }
+        let nArray = []
 
-     getNeighbours(board, height, width){
-
-        let updatedBoard = board;
-
-        for(let i = 0; i < height; i++){
-            for(let j = 0; j < width; i++){
-                if(board[i][j].isMine !== true){
-                    let mine = 0;
-
-                    const area = this.searchBoard(
-                        board[i][j].x, 
-                        board[i][j].y, 
-                        board
-                    )
-                }
-            }
+        if(x > 0 && y > 0){
+                nArray.push(
+                    [x-1, y],
+                    [x+1, y],
+                    [x+1, y+1],
+                    [x+1, y-1],
+                    [x-1, y+1],
+                    [x-1, y-1],
+                    [x, y+1 ],
+                    [x, y-1],
+                ) 
+        }
+        if(y < 0){
+            nArray.push(
+                [x-1, y],
+                [x+1, y],
+                [x+1, y+1],
+                [x-1, y+1],
+                [x, y+1 ],
+            )
         }
 
-     }
+        if(x < 0){
 
-     searchBoard(x, y, board){
-
-        const coord = [];
-
-        if(x > 0){
-            coord.push(board[x-1][y]);
-        }
-
-        if(x > 0){
-            coord.push(board[x-1][y]);
-        }
-        if(x > 0){
-            coord.push(board[x-1][y]);
-        }
-        if(x > 0){
-            coord.push(board[x-1][y]);
-        }
-        if(x > 0){
-            coord.push(board[x-1][y]);
-        }
-        if(x > 0){
-            coord.push(board[x-1][y]);
+            nArray.push(
+                
+                    [x+1, y],
+                    [x+1, y+1],
+                    [x+1, y-1],
+                    [x, y+1 ],
+                    [x, y-1],
+            )
         }
 
-        return coord;
+        return  nArray;
 
      }
 
@@ -107,7 +88,7 @@ export default class Board extends React.Component{
                     x: i,
                     y: j,
                     isMine: false,
-                    neighbour: 0,
+                    neighbours: [],
                     isOpen: false,
 
                 }
