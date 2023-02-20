@@ -213,7 +213,7 @@ initBoardSettings(height, width){
      gameOver(){
 
         if(this.state.gameOver === true) 
-        <div>
+        return <div>
             <h1>Game Over</h1>
             <button onClick={this.resetGame}>Retry?</button>
         </div> 
