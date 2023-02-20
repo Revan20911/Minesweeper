@@ -17,6 +17,12 @@ export default class Board extends React.Component{
         mineList: [],
      }
     
+    resetGame(){
+
+        window.location.reload();
+
+     }
+    
     checkVictory(){
 
         let count = 0;
