@@ -75,6 +75,22 @@ export default class Board extends React.Component{
         })
 
      }
+     
+      generateMines(){
+
+        let mineMap = [];
+
+        for(let i = 0; i < 10; i++){
+
+            let xcoord = Math.floor(Math.random() * 10);
+            let ycoord = Math.floor(Math.random() * 10);
+    
+            mineMap.push([xcoord, ycoord]);
+         
+        }
+
+        return mineMap;
+     }
 
 
      initBoardSettings(height, width, mines){
