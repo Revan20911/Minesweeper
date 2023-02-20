@@ -111,27 +111,18 @@ export default class Board extends React.Component{
             let nx = n[0 ];
             let ny = n[1];
 
-            if(updatedBoard[nx][ny].isMine == false && updatedBoard[nx][ny].isOne == false ){
+            if(updatedBoard[nx][ny].isMine === false ){
 
                 updatedBoard[nx][ny].isOpen = true;
+                updatedBoard[x][y].isOpen = true;
 
-            }
-
-            if(updatedBoard[nx][ny].isMine == true){
-
-                if(updatedBoard[nx + 1][ny] && updatedBoard[nx][ny+1]){
-
-                    updatedBoard[nx + 1][ny].isOne = true;
-                    updatedBoard[nx][ny+1].isOne = true;
-
-                }
-
+                //this can be expanded with another loop to loop over the neighbors of the neighbors to identify 1,2,3,4 etc.
             }
         })
 
         if(updatedBoard[x][y].isMine == true){
 
-            updatedBoard.gameOver = true;
+            this.setState({gameOver: true});
             
         }
         
