@@ -171,7 +171,7 @@ export default class Board extends React.Component{
         return mineMap;
      }
 
-
+initBoardSettings(height, width){
      let temp = [];
 
         let mineMap = this.generateMines();
